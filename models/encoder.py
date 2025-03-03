@@ -75,20 +75,20 @@ class FCN_Encoder(nn.Module):
     def forward(self, x):
         ## vanilla conv
         for layer in self.vanilla_layers:
-            print(f'van, {x.size()}')
+            # print(f'van, {x.size()}')
             x = layer(x)
         ## octave conv
         for layer in self.octave_layers:
-            if isinstance(x, tuple):
-                print(f'oct, {x[0].size()}', x[1].size())
+            # if isinstance(x, tuple):
+                # print(f'oct, {x[0].size()}', x[1].size())
             x = layer(x)
 
-        assert x[1] is None
+        # assert x[1] is None
         x = x[0]
 
         ## dsc conv
         for layer in self.dsc_layers:
-            print(f'dsc, {x.size()}')
+            # print(f'dsc, {x.size()}')
             x = layer(x)
         return x
 
