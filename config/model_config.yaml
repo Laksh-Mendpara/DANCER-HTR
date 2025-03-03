@@ -1,0 +1,18 @@
+model_config:
+  Vanilla:
+    num_layers: 3
+    conv_filters: [16, 16, 16]
+    stride: [1, 1, 1]
+  
+  Octave:
+    num_layers: 10
+    conv_filters: [32, 32, 64, 64, 128, 128, 128, 128, 128, 128]
+    octave_alpha: [0.5, 0.5, 0.375, 0.375, 0.25, 0.25, 0.125, 0.125, 0.125, 0.00]
+    stride: [1, 2, 1, 2, 1, 2, 1, 1, 1, 1]
+    max_pool: [0, 0, 0, 0, 0, 0, 0, 2, 0, 2]
+
+  Separable_DepthWise_Block:
+    num_layers: 3
+    conv_filters: [256, 256, 256]
+    gated_conv: [False, False, True]
+    stride: [1, 1, 1]
