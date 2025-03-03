@@ -4,9 +4,29 @@ from torch.nn import InstanceNorm2d
 from torch.nn import Dropout, Dropout2d
 from torch.nn import ReLU, Sigmoid
 from torch.nn.functional import pad
+import torch.nn.functional as F
 import torch.nn as nn
 import random
 import math
+
+
+def safe_add(x1, x2):
+    if x1 is None:
+        return x2
+    if x2 is None:
+        return x1
+
+    if x1.shape == x2.shape:
+        return x1 + x2  # Direct addition if shapes match
+
+    # Get target size (largest between both)
+    target_shape = (max(x1.shape[2], x2.shape[2]), max(x1.shape[3], x2.shape[3]))
+
+    # Resize both tensors to the same size
+    x1_resized = F.interpolate(x1, size=target_shape, mode="bilinear", align_corners=False)
+    x2_resized = F.interpolate(x2, size=target_shape, mode="bilinear", align_corners=False)
+
+    return x1_resized + x2_resized  # Add resized tensors
 
 
 class MixDropout(Module):
@@ -82,11 +102,12 @@ class OctaveConv(nn.Module):
                                   kernel_size, 1, padding, dilation, math.ceil(groups - alpha_in * groups), bias)
 
     def forward(self, x):
-        x_h, x_l = x if type(x) is tuple else (x, None)
+        x_h, x_l = x if isinstance(x, tuple) else (x, None)
 
         x_h = self.downsample(x_h) if self.stride == 2 else x_h
         x_h2h = self.conv_h2h(x_h)
         x_h2l = self.conv_h2l(self.downsample(x_h)) if self.alpha_out > 0 and not self.is_dw else None
+        
         if x_l is not None:
             x_l2l = self.downsample(x_l) if self.stride == 2 else x_l
             x_l2l = self.conv_l2l(x_l2l) if self.alpha_out > 0 else None
@@ -95,11 +116,15 @@ class OctaveConv(nn.Module):
             else:
                 x_l2h = self.conv_l2h(x_l)
                 x_l2h = self.upsample(x_l2h) if self.stride == 1 else x_l2h
-                x_h = x_l2h + x_h2h
-                x_l = x_h2l + x_l2l if x_h2l is not None and x_l2l is not None else None
+
+                # Fix: Call safe_add correctly
+                x_h = safe_add(x_l2h, x_h2h)  # Corrected function call
+                
+                x_l = safe_add(x_h2l, x_l2l)  # Also handle low-frequency part safely
                 return x_h, x_l
         else:
             return x_h2h, x_h2l
+
 
 
 class DepthSepConv2D(Module):
@@ -150,7 +175,7 @@ class DepthSepConv2D(Module):
 
 
 class DSCBlock(Module):
-    def __init__(self, in_, out_, stride=(2, 1), activation=ReLU, dropout=0.4):
+    def __init__(self, in_, out_, stride=(1, 1), activation=ReLU, dropout=0.4):
         super(DSCBlock, self).__init__()
 
         self.activation = activation()

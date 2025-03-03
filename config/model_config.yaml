@@ -7,11 +7,13 @@ model_config:
     stride: 1
   
   Octave:
-    num_layers: 10
-    out_channels: [32, 32, 64, 64, 128, 128, 128, 128, 128, 128]
-    octave_alpha: [0.5, 0.5, 0.375, 0.375, 0.25, 0.25, 0.125, 0.125, 0.125, 0.00]
-    stride: [1, 2, 1, 2, 1, 2, 1, 1, 1, 1]
-    max_pool: [0, 0, 0, 0, 0, 0, 0, 2, 0, 2]
+    num_layers: 5
+    out_channels: [32, 32, 64, 64, 128]
+    octave_alpha: [0.5, 0.375, 0.25, 0.125, 0.00]
+    kernel_size: [3, 3, 3, 3, 3,]
+    stride: [1, 2, 1, 2, 1]
+    max_pool: [0, 0, 0, 0, 0]
+    padding: [1, 0, 0, 0, 0]
 
   Separable_DepthWise_Block:
     num_layers: 3
