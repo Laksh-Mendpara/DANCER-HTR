@@ -6,7 +6,7 @@ from PIL import Image
 import numpy as np
 
 from models.encoder import FCN_Encoder
-from .models import GlobalHTADecoder
+from models.decoder_doc import GlobalHTADecoder
 from .trainer import Manager
 from basic.utils import pad_images
 from basic.metric_manager import keep_all_but_tokens

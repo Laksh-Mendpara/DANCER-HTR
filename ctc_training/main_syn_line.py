@@ -5,7 +5,7 @@ DOSSIER_COURRANT = dirname(os.path.abspath(__file__))
 ROOT_FOLDER = dirname(dirname(dirname(DOSSIER_COURRANT)))
 sys.path.append(ROOT_FOLDER)
 from .trainer_line_ctc import TrainerLineCTC
-from .models_line_ctc import Decoder
+from models.decoder_ctc import Decoder
 from models.encoder import FCN_Encoder
 from torch.optim import Adam
 from dataset.transforms import line_aug_config

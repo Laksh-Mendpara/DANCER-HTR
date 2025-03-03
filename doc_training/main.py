@@ -9,7 +9,7 @@ from torch.optim import Adam
 from dataset.transforms import aug_config
 from OCR.ocr_dataset_manager import OCRDataset, OCRDatasetManager
 from .trainer import Manager
-from .models import GlobalHTADecoder
+from models.decoder_doc import GlobalHTADecoder
 from models.encoder import FCN_Encoder
 from basic.scheduler import exponential_dropout_scheduler, linear_scheduler
 import torch
