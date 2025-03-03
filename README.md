@@ -8,12 +8,6 @@ This repository is an unofficial reimplementation of **DANCER** by David Castro 
 
 ## Getting Started
 
-### Prerequisites
-Ensure you have the following dependencies installed:
-- **Python 3.9.1**
-- **PyTorch 1.8.2**
-- **CUDA 10.2** (for GPU support)
-
 ### Installation
 Clone the repository:
 ```sh
