@@ -3,7 +3,7 @@ import re
 import networkx as nx
 import editdistance
 import numpy as np
-from dataset.post_processing_layout import PostProcessingModuleREAD, PostProcessingModuleRIMES
+from dataset.post_processing_layout import PostProcessingModuleREAD
 
 
 class MetricManager:
