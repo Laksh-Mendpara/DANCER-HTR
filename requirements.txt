@@ -27,7 +27,7 @@ joblib==1.2.0
 kiwisolver==1.3.2
 manim==0.15.0
 manimlib==0.2.0
-ManimPango==0.4.0.post2
+# ManimPango==0.4.0.post2
 mapbox-earcut==0.12.11
 Markdown==3.3.6
 matplotlib==3.5.1
@@ -43,7 +43,7 @@ progressbar==2.5
 protobuf==3.19.4
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
-pycairo==1.20.1
+# pycairo==1.20.1
 pydub==0.25.1
 pyglet==1.5.21
 Pygments==2.11.2
