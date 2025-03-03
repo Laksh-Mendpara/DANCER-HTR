@@ -176,3 +176,10 @@ Datasets/raw
 
 *.sh
 *.out
+
+## FONTS
+Fonts/dejavu-fonts-ttf-2.37
+Fonts/Gentium_Plus
+Lato
+Fonts/dejavu-fonts-ttf-2.37.tar.bz2
+Fonts/Gentium_Plus,Lato.zip
