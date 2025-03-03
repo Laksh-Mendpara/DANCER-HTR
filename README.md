@@ -31,8 +31,6 @@ This script allows direct recognition of images using trained model weights.
 ## Datasets
 This repository uses the **READ 2016 dataset**, which was part of the ICFHR 2016 competition on handwritten text recognition.
 
-You can find the dataset [here](https://www.read2016.com) (link placeholder).
-
 Place the raw dataset files in the following directory:
 ```
 Datasets/raw/READ_2016
