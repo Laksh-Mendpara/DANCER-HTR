@@ -23,7 +23,7 @@ pip install -r requirements.txt
 ## Quick Prediction
 An example script is available at:
 ```
-OCR/document_OCR/dan/predict_examples
+doc_training/predict_examples.py
 ```
 This script allows direct recognition of images using trained model weights.
 (Note: Model weights will be uploaded soon.)
